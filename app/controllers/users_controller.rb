@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :require_no_user, :only => [:new, :create]
+  before_filter :allow_only_first_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update, :destroy]
 
   def new
@@ -43,4 +43,8 @@ class UsersController < ApplicationController
     redirect_to '/'
   end
   
+  private
+  def allow_only_first_user
+    User.first ? require_user : require_no_user
+  end
 end
