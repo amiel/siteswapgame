@@ -150,7 +150,7 @@ function new_game() {
 	setup_game();
 	
 	// cheat
-	more_info($('<button></button>').html('Cheat').click(function() { $.each(current_possible_answers, function(i,e){ more_info(e); }); return false; }));
+	// more_info($('<button></button>').html('Cheat').click(function() { $.each(current_possible_answers, function(i,e){ more_info(e); }); return false; }));
 	return false;
 }
 
