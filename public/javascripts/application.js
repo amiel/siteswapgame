@@ -22,8 +22,16 @@ function numbers_from_string(s) {
 }
 
 
+function more_info(info) {
+	$('#more_info').append(info);
+	$('#more_info').append('<br/>');
+}
+
 function new_game() {
-	var sorted_anagram, current_possible_answers;
+	var	current_possible_answers,
+		score = 0,
+		seconds_left = 2 * 60,
+		timer = null;
 
 
 	function correct_answer(attempt)  {
@@ -33,23 +41,40 @@ function new_game() {
 		return false;
 	}
 	
+	function show_score() {
+		$('#score .value').html(score);
+	}
+	
+	function show_time_left() {
+		$('#time_left .value').html(seconds_left);
+	}
+	
 	function output_result(to, value) {
 		return $(to).parent().find('.result').html(value);
 	}
 	
 	function have_duplicate_answer(input, attempt) {
 		var found_duplicate_answer = false;
-		input.parent().parent().find('input').not(input).each(function(index) {
+		input.parent().parent().find('input').not(input).each(function() {
 			if ($(this).val() == attempt) found_duplicate_answer = true;
 		});
 		return found_duplicate_answer;
+	}
+	
+	function all_finished() {
+		var found_unfinished = false;
+		$('#attempts input').each(function() {
+			if (!$(this).attr('readonly')) found_unfinished = true;
+		});
+		return !found_unfinished;
 	}
 
 	function setup_handlers() {
 		$('#attempts input').keyup(function() {
 			var input = $(this),
 				attempt = $(this).val();
-			
+				
+			if (input.attr('readonly')) return;
 			input.parent().find('.result').empty();
 			if (attempt.length != 7) return;
 
@@ -60,6 +85,13 @@ function new_game() {
 					output_result(input, 'ok');
 					input.attr('readonly', 'readonly');
 					input.parent().next().find('input').focus();
+					++score;
+					show_score();
+					
+					if (all_finished()) {
+						$('#attempts').append('<li><button id="next">Next</button></li>');
+						$('#attempts #next').click(new_problem);
+					}
 				}
 			} else {
 				output_result(input, 'incorrect');
@@ -79,11 +111,10 @@ function new_game() {
 		return numbers;
 	}
 
-	function setup_game() {
-		var numbers = create_siteswap();
+	function new_problem() {
+		var numbers = create_siteswap(), sorted_anagram = numbers.sort().join('');
 		$('#problem').html(numbers.join(''));
 		$('#attempts').empty();
-		sorted_anagram = numbers.sort().join('');
 		current_possible_answers = siteswap_anagrams[sorted_anagram];
 	
 		Base.log(current_possible_answers);
@@ -94,12 +125,37 @@ function new_game() {
 		setup_handlers();
 	}
 
+	function finish_game() {
+		$('#attempts input').attr('readonly', 'readonly');
+		more_info('Game Over!');
+	}
+
+	function countdown() {
+		--seconds_left;
+		show_time_left();
+		if (seconds_left == 0) {
+			finish_game();
+			clearInterval(timer);
+		}
+	}
+
+	function setup_game() {
+		new_problem();
+		show_score();
+		show_time_left();
+		$('#more_infos').empty();
+		timer = setInterval(countdown, 1000);
+	}
+
 	setup_game();
 	
+	// cheat
+	more_info($('<button></button>').html('Cheat').click(function() { $.each(current_possible_answers, function(i,e){ more_info(e); }); return false; }));
 	return false;
 }
 
 $(document).ready(function() {
 	$('#new_game').click(new_game);
 	$('#container').submit(function() { return false; });
+	new_game();
 });
