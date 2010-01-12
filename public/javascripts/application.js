@@ -1,5 +1,6 @@
 
 // not used anymore
+// expects an array of integers whose sum is divisible by the length
 function is_valid(values) {
 	var catch_position,
 		catches = [],
@@ -144,6 +145,7 @@ function new_game() {
 		show_score();
 		show_time_left();
 		$('#more_infos').empty();
+		if (timer) clearInterval(timer);
 		timer = setInterval(countdown, 1000);
 	}
 
