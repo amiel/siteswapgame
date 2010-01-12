@@ -145,7 +145,6 @@ function new_game() {
 		show_score();
 		show_time_left();
 		$('#more_infos').empty();
-		if (timer) clearInterval(timer);
 		timer = setInterval(countdown, 1000);
 	}
 
@@ -157,7 +156,7 @@ function new_game() {
 }
 
 $(document).ready(function() {
-	$('#new_game').click(new_game);
+	$('#new_game').click(function() { document.location.reload(); });
 	$('#container').submit(function() { return false; });
 	new_game();
 });
