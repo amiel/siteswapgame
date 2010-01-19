@@ -1,3 +1,14 @@
+= Site Swap Game
+
+The idea for this game came from Daniel. For anyone interested in helping, here is a brief introduction.
+
+* This project is written in Ruby on Rails. I've left the Rails README below
+* 95% of the code for this is javascript, and can be found at public/javascripts/application.js
+* The html markup can be found at app/views/home/index.html.erb which is wrapped with the layout at app/views/layouts/application.html.erb
+* The siteswap dictionary that application.js uses is public/javascripts/period_7_anagrams.js. I recommend not to open it in your text editor. Eventually I will include the scripts I used to make this in lib.
+
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create 
@@ -43,53 +54,6 @@ Mongrel is a Ruby-based webserver with a C component (which requires compilation
 suitable for development and deployment of Rails applications. If you have Ruby Gems installed,
 getting up and running with mongrel is as easy as: <tt>gem install mongrel</tt>.
 More info at: http://mongrel.rubyforge.org
-
-Say other Ruby web servers like Thin and Ebb or regular web servers like Apache or LiteSpeed or
-Lighttpd or IIS. The Ruby web servers are run through Rack and the latter can either be setup to use
-FCGI or proxy to a pack of Mongrels/Thin/Ebb servers.
-
-== Apache .htaccess example for FCGI/CGI
-
-# General Apache options
-AddHandler fastcgi-script .fcgi
-AddHandler cgi-script .cgi
-Options +FollowSymLinks +ExecCGI
-
-# If you don't want Rails to look in certain directories,
-# use the following rewrite rules so that Apache won't rewrite certain requests
-# 
-# Example:
-#   RewriteCond %{REQUEST_URI} ^/notrails.*
-#   RewriteRule .* - [L]
-
-# Redirect all requests not available on the filesystem to Rails
-# By default the cgi dispatcher is used which is very slow
-# 
-# For better performance replace the dispatcher with the fastcgi one
-#
-# Example:
-#   RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
-RewriteEngine On
-
-# If your Rails application is accessed via an Alias directive,
-# then you MUST also set the RewriteBase in this htaccess file.
-#
-# Example:
-#   Alias /myrailsapp /path/to/myrailsapp/public
-#   RewriteBase /myrailsapp
-
-RewriteRule ^$ index.html [QSA]
-RewriteRule ^([^.]+)$ $1.html [QSA]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ dispatch.cgi [QSA,L]
-
-# In case Rails experiences terminal errors
-# Instead of displaying this message you can supply a file here which will be rendered instead
-# 
-# Example:
-#   ErrorDocument 500 /500.html
-
-ErrorDocument 500 "<h2>Application error</h2>Rails application failed to start properly"
 
 
 == Debugging Rails
