@@ -42,7 +42,6 @@ function new_game() {
 
 	function equal_siteswap(a, b) {
 		for(var i = 0; i < b.length; ++i) {
-			window.console.log(a, b);
 			if (a == b) return true;
 			b = b.rotate();
 		}
