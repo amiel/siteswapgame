@@ -23,6 +23,11 @@ function numbers_from_string(s) {
 }
 
 
+String.prototype.rotate = function() {
+	return this.substring(1) + this.substring(0, 1);
+};
+
+
 function more_info(info) {
 	$('#more_info').append(info);
 	$('#more_info').append('<br/>');
@@ -35,9 +40,18 @@ function new_game() {
 		timer = null;
 
 
+	function equal_siteswap(a, b) {
+		for(var i = 0; i < b.length; ++i) {
+			window.console.log(a, b);
+			if (a == b) return true;
+			b = b.rotate();
+		}
+		return false;
+	}
+
 	function correct_answer(attempt)  {
 		for (var a in current_possible_answers) {
-			if (current_possible_answers[a] == attempt) return true;
+			if (equal_siteswap(current_possible_answers[a], attempt)) return true;
 		}
 		return false;
 	}
@@ -156,7 +170,7 @@ function new_game() {
 }
 
 $(document).ready(function() {
-	$('#new_game').click(function() { document.location.reload(); });
+	$('#new_game').click(function() { document.location.reload(); }); // new_game doesn't work because there is no way to stop the timer yet
 	$('#container').submit(function() { return false; });
 	new_game();
 });
