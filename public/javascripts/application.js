@@ -187,4 +187,7 @@ $(document).ready(function() {
 	$('#new_game').click(function() { document.location.reload(); return false; }); // new_game doesn't work because there is no way to stop the timer yet
 	$('#container').submit(function() { return false; });
 	var game = new Game();
+	
+	$('#scores_button').click(function() { document.location = Base.scores_path; });
+	$('#play_again').click(function() { document.location = Base.root_path; });
 });

@@ -1,7 +1,9 @@
+<% js_var :scores_path, scores_path %>
+
 <form id="container">
 	<div id="instructions">
-		<p>Goal: Find as many anagrams of the following numbers that are valid siteswaps. <%= link_to 'scores', scores_path %></p>
-		<button id="new_game">New Game</button>
+		<%= spreadhead 'goal' %>
+		<p><button id="new_game">New Game</button> <button id="scores_button">Scores</button>
 	</div>
 	
 	<h2 id="problem"></h2>
@@ -13,7 +15,7 @@
 	<div id="information_widget">
 		<div id="score">Score: <span class="value"></span></div>
 		<div id="time_taken">Time: <span class="value"></span></div>
-		<div><button id="done">done</button></div>
+		<div><button id="done">Done</button></div>
 		<div id="more_info"></div>
 	</div>
 	
