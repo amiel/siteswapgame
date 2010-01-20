@@ -72,7 +72,7 @@ function Game() {
 	function have_duplicate_answer(input, attempt) {
 		var found_duplicate_answer = false;
 		input.parent().parent().find('input').not(input).each(function() {
-			if ($(this).val() == attempt) found_duplicate_answer = true;
+			if (equal_siteswap($(this).val(), attempt)) found_duplicate_answer = true;
 		});
 		return found_duplicate_answer;
 	}
