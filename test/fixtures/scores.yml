@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  score: 1
+  time: 1
+
+two:
+  name: MyString
+  score: 1
+  time: 1

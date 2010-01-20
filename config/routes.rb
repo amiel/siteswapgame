@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :scores
+
   map.root :controller => 'home'
 
   map.signup '/signup', :controller => 'users', :action => 'create', :conditions => { :method => :post}

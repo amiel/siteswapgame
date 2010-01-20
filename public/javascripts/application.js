@@ -33,10 +33,12 @@ function more_info(info) {
 	$('#more_info').append('<br/>');
 }
 
-function new_game() {
+
+
+function Game() {
 	var	current_possible_answers,
 		score = 0,
-		seconds_left = 2 * 60,
+		seconds_taken = 0,
 		timer = null;
 
 
@@ -59,8 +61,8 @@ function new_game() {
 		$('#score .value').html(score);
 	}
 	
-	function show_time_left() {
-		$('#time_left .value').html(seconds_left);
+	function show_time_taken() {
+		$('#time_taken .value').html(seconds_taken);
 	}
 	
 	function output_result(to, value) {
@@ -138,38 +140,51 @@ function new_game() {
 		
 		setup_handlers();
 	}
-
-	function finish_game() {
-		$('#attempts input').attr('readonly', 'readonly');
-		more_info('Game Over!');
+	
+	function stop_timer() {
+		clearInterval(timer);
 	}
 
-	function countdown() {
-		--seconds_left;
-		show_time_left();
-		if (seconds_left == 0) {
-			finish_game();
-			clearInterval(timer);
-		}
+	function score_form() {
+		var name_label = $('<label>').attr('for', 'score_name').html('Name:'),
+			name = $('<input name="score[name]" id="score_name" type="text" />'),
+			score_input = $('<input name="score[score]" type="hidden" />').val(score),
+			time = $('<input name="score[time]" type="hidden" />').val(seconds_taken),
+			submit = $('<input type="submit" value="post score" />'),
+			authenticity_token = $('<input type="hidden" name="authenticity_token" />').val(Base.authenticity_token),
+			form = $('<form action="/scores" method="post" />');
+		return form.append(name_label).append(name).append(score_input).append(time).append(authenticity_token).append(submit);
+	}
+
+	function finish_game() {
+		stop_timer();
+		$('#attempts input').attr('readonly', 'readonly');
+		more_info('Game Over!');
+		more_info(score_form());
+	};
+
+	function tick() {
+		++seconds_taken;
+		show_time_taken();
 	}
 
 	function setup_game() {
 		new_problem();
 		show_score();
-		show_time_left();
+		show_time_taken();
 		$('#more_infos').empty();
-		timer = setInterval(countdown, 1000);
+		$('#done').click(finish_game);
+		timer = setInterval(tick, 1000);
 	}
 
 	setup_game();
 	
 	// cheat
 	// more_info($('<button></button>').html('Cheat').click(function() { $.each(current_possible_answers, function(i,e){ more_info(e); }); return false; }));
-	return false;
 }
 
 $(document).ready(function() {
-	$('#new_game').click(function() { document.location.reload(); }); // new_game doesn't work because there is no way to stop the timer yet
+	$('#new_game').click(function() { document.location.reload(); return false; }); // new_game doesn't work because there is no way to stop the timer yet
 	$('#container').submit(function() { return false; });
-	new_game();
+	var game = new Game();
 });

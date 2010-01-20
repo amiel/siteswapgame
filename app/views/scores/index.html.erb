@@ -1,0 +1,30 @@
+<div id="container">
+
+	<div id="header">
+		<h1>Site Swap Game</h1>
+		<p><%= link_to 'Play Again', root_path %></p>
+	</div>
+
+	<table id="scores">
+		<thead>
+			<tr>
+				<td>Score</td>
+				<td>Time</td>
+				<td>Name</td>
+			</tr>
+		</thead>
+		<tbody>
+		<% @grouped_scores.each do |score_value, scores| %>
+			<% first = true %>
+			<% scores.each do |score| %>
+				<tr>
+					<td><%= first ? score_value : '&nbsp;' %></td>
+					<td><%= score.time %> sec</td>
+					<td><%= score.name %></td>
+				</tr>
+			<% end %>
+		<% end %>
+		</tbody>
+	</table>
+
+</div>
