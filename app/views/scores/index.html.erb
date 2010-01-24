@@ -10,21 +10,19 @@
 		<thead>
 			<tr>
 				<td>Score</td>
+				<td>Points</td>
 				<td>Time</td>
 				<td>Name</td>
 			</tr>
 		</thead>
 		<tbody>
-		<% @grouped_scores.each do |score_value, scores| %>
-			<% first = true %>
-			<% scores.each do |score| %>
-				<tr>
-					<td><%= first ? score_value : '&nbsp;' %></td>
-					<td><%= score.time %> sec</td>
-					<td><%= score.name %></td>
-				</tr>
-				<% first = false %>
-			<% end %>
+		<% @scores.each do |score| %>
+			<tr class="<%= cycle 'odd', 'even' %>">
+				<td class="numeric"><%= score.score.to_f.round 1 %></td>
+				<td class="numeric"><%= score.points %></td>
+				<td class="numeric"><%= score.time %> sec</td>
+				<td><%= score.name %></td>
+			</tr>
 		<% end %>
 		</tbody>
 	</table>

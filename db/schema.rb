@@ -9,26 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124001851) do
+ActiveRecord::Schema.define(:version => 20100124213720) do
 
   create_table "pages", :force => true do |t|
-    t.string   "url",                                           :null => false
-    t.text     "text",        :limit => 255,                    :null => false
-    t.string   "title",                                         :null => false
+    t.string   "url",                            :null => false
+    t.text     "text",                           :null => false
+    t.string   "title",                          :null => false
     t.string   "keywords"
     t.string   "description"
     t.string   "formatting"
     t.string   "category"
-    t.boolean  "published",                  :default => false, :null => false
+    t.boolean  "published",   :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["url", "id", "published"], :name => "index_pages_on_url_and_id_and_published"
+  add_index "pages", ["id", "published", "url"], :name => "index_pages_on_url_and_id_and_published"
 
   create_table "scores", :force => true do |t|
     t.string   "name"
-    t.integer  "score"
+    t.integer  "points"
     t.integer  "time"
     t.datetime "created_at"
     t.datetime "updated_at"

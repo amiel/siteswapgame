@@ -38,6 +38,7 @@ function more_info(info) {
 function Game() {
 	var	current_possible_answers,
 		score = 0,
+		time_at_last_score = 0,
 		seconds_taken = 0,
 		timer = null;
 
@@ -57,8 +58,14 @@ function Game() {
 		return false;
 	}
 	
+	function increment_score() {
+		++score;
+		time_at_last_score = seconds_taken;
+	}
+	
 	function show_score() {
 		$('#score .value').html(score);
+		$('#last_score .value').html(time_at_last_score);
 	}
 	
 	function show_time_taken() {
@@ -101,7 +108,7 @@ function Game() {
 					output_result(input, 'ok');
 					input.attr('readonly', 'readonly');
 					input.parent().next().find('input').focus();
-					++score;
+					increment_score();
 					show_score();
 					
 					if (all_finished()) {
@@ -148,8 +155,8 @@ function Game() {
 	function score_form() {
 		var name_label = $('<label>').attr('for', 'score_name').html('Name:'),
 			name = $('<input name="score[name]" id="score_name" type="text" />'),
-			score_input = $('<input name="score[score]" type="hidden" />').val(score),
-			time = $('<input name="score[time]" type="hidden" />').val(seconds_taken),
+			score_input = $('<input name="score[points]" type="hidden" />').val(score),
+			time = $('<input name="score[time]" type="hidden" />').val(time_at_last_score),
 			submit = $('<input type="submit" value="post score" />'),
 			authenticity_token = $('<input type="hidden" name="authenticity_token" />').val(Base.authenticity_token),
 			form = $('<form action="/scores" method="post" />');

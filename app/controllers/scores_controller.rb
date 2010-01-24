@@ -1,7 +1,7 @@
 class ScoresController < ApplicationController
   def index
     @scores = Score.scoreboard
-    @grouped_scores = @scores.group_by(&:score)
+    # @grouped_scores = @scores.group_by(&:score)
   end
   
   def create
