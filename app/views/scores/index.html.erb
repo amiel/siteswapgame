@@ -10,6 +10,7 @@
 		<thead>
 			<tr>
 				<td>Score</td>
+				<td>Points/Minute</td>
 				<td>Points</td>
 				<td>Time</td>
 				<td>Name</td>
@@ -19,6 +20,7 @@
 		<% @scores.each do |score| %>
 			<tr class="<%= cycle 'odd', 'even' %>">
 				<td class="numeric"><%= score.score.to_f.round 1 %></td>
+				<td class="numeric"><%= score.points_per_minute.to_f.round 2 %></td>
 				<td class="numeric"><%= score.points %></td>
 				<td class="numeric"><%= score.time %> sec</td>
 				<td><%= score.name %></td>
