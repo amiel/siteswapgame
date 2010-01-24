@@ -9,17 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100120050551) do
+ActiveRecord::Schema.define(:version => 20100124001851) do
 
   create_table "pages", :force => true do |t|
-    t.string   "url",                            :null => false
-    t.string   "text",                           :null => false
-    t.string   "title",                          :null => false
+    t.string   "url",                                           :null => false
+    t.text     "text",        :limit => 255,                    :null => false
+    t.string   "title",                                         :null => false
     t.string   "keywords"
     t.string   "description"
     t.string   "formatting"
     t.string   "category"
-    t.boolean  "published",   :default => false, :null => false
+    t.boolean  "published",                  :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

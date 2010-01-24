@@ -1,6 +1,6 @@
 class ScoresController < ApplicationController
   def index
-    @scores = Score.all :order => 'score ASC, time ASC'
+    @scores = Score.scoreboard
     @grouped_scores = @scores.group_by(&:score)
   end
   
