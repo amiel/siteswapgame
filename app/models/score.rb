@@ -10,6 +10,6 @@ class Score < ActiveRecord::Base
       points*points/(time*1.0)*100 as score
     SQL
     
-    all :select => select, :order => 'score DESC'
+    all :select => select, :order => 'score DESC', :conditions => ['time IS NOT NULL AND time != 0 AND points != 0']
   end
 end
