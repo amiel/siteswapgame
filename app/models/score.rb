@@ -6,6 +6,7 @@ class Score < ActiveRecord::Base
       name,
       points,
       time,
+      created_at,
       points/(time*1.0)*60 as points_per_minute,
       points*points/(time*1.0)*100 as score
     SQL
