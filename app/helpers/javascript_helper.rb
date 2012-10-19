@@ -6,11 +6,7 @@ module JavascriptHelper
   end
 
   def js_var(key, value, scope = @_js_var_scope)
-    content_for(:in_javascript) { "Base.reg(#{ key.to_json }, #{ value.to_json }#{ ", " + scope.to_json if scope });" }
-  end
-
-  def assign_i18n_for_javasrcipt
-    js_var :I18n, I18n.backend.send(:translations)[I18n.locale.to_sym][:js]
+    content_for(:in_javascript) { "Base.reg(#{ key.to_json }, #{ value.to_json }#{ ", " + scope.to_json if scope });".html_safe }
   end
 
   def include_jquery_from_google

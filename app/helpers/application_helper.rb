@@ -4,18 +4,12 @@ module ApplicationHelper
   end
 
   def render_title
-    title = @_title || @content_for_title
-    if title then
-      "#{title} - #{t('site_name')}"
-    else
-      "#{t('site_name')} - #{t('slogan')}"
-    end
+    'Site Swap Game'
   end
 
   def title(str)
     @_title = str
   end
-
 
   def javascript(name)
     content_for(:javascript) { javascript_include_tag name }

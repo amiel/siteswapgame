@@ -10,7 +10,6 @@
   <meta name="Keywords" content="<%= yield :keywords -%>" />
 
   <%= stylesheet_link_tag 'application' %>
-  <%= stylesheet_link_tag 'print', media: 'print' %>
 
   <%= yield :head %>
 
@@ -21,7 +20,6 @@
   <div id="header">
     <h1>Site Swap Game</h1>
   </div>
-
 
   <%= yield %>
   <%= render 'javascript' %>
