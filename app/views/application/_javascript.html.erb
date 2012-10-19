@@ -1,6 +1,5 @@
 <%= include_jquery_from_google %>
-<%# javascript_include_tag 'vendor/jquery' %>
-<%#= javascript_include_tag 'lib/base', 'period_7_anagrams', 'application' %>
+<%= javascript_include_tag 'period_7_anagrams', 'application' %>
 
 <% js_var :DEBUG, !Rails.env.production? %>
 <% js_var :authenticity_token, form_authenticity_token %>
