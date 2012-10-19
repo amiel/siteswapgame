@@ -1,0 +1,34 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+@import "_reset";
+@import "_960";
+
+#container{ .container_12; }
+#header{ .grid_12; padding: 1em 0; }
+#instructions{ .grid_12; }
+#problem{ .grid_2; .prefix_1; .suffix_9; font-size: 3em; letter-spacing: 0.4em; font-family: sans-serif; }
+#attempts{ .grid_5; .prefix_1; }
+
+#information_widget{ .grid_5; .prefix_1; }
+
+#scores{ .grid_12;
+    tr.even{ background-color: #eee; }
+    td{ padding-right: 1em; }
+    td.numeric{ text-align: right; }
+    thead td{ padding-bottom: 0.3em; font-weight: bold; }
+    td.time{ font-family: "courier new", monospace; font-size: 85%; }
+}
+
+.users h1, .users form, .pages h2, .pages table{ .grid_12; }
+
