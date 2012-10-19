@@ -1,0 +1,35 @@
+<% js_var :root_path, root_path %>
+
+<div id="container">
+
+  <div id="header">
+    Your score is the points squared divided by time. This weighs the score higher but still accounts for time.
+    <p><button id="play_again">Play Again</button></p>
+  </div>
+
+  <table id="scores">
+    <thead>
+      <tr>
+        <td>Score</td>
+        <td>Points/Minute</td>
+        <td>Points</td>
+        <td>Time</td>
+        <td>Name</td>
+        <td>When</td>
+      </tr>
+    </thead>
+    <tbody>
+    <% @scores.each do |score| %>
+      <tr class="<%= cycle 'odd', 'even' %>">
+        <td class="numeric"><%= score.score.to_f.round 1 %></td>
+        <td class="numeric"><%= score.points_per_minute.to_f.round 2 %></td>
+        <td class="numeric"><%= score.points %></td>
+        <td class="numeric"><%= score.time %> sec</td>
+        <td><%= score.name %></td>
+        <td class="time"><%=l score.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,38 @@
+<% js_var :scores_path, scores_path %>
+
+<form id="container">
+  <div id="instructions">
+
+    <p>Goal: Find as many anagrams of the following numbers that are valid siteswaps.</p>
+
+    <p>
+      Optional: Download and print out a <a href="http://www.siteswapgeneration.com/downloads/gameboard_RNBW.pdf">10x7 colorswap board</a> to help with solving these anagrams.
+    </p>
+
+    <p>
+      Setting up the board: For every number generated place a stone in it's respective row (column being arbitrary).
+    </p>
+
+    <p>
+      Solving the Puzzle: Move any stone any number of spaces left or right, but never up, down or diagonally. The puzzle is solved when there is only one stone in every column and simultaniously only one stone on each color.
+      <a href="http://www.siteswapgeneration.com/games.html">other colorswap variants</a>
+    </p>
+
+    <p><button id="new_game">New Game</button> <button id="scores_button">Scores</button></p>
+  </div>
+
+  <h2 id="problem"></h2>
+
+  <ul id="attempts">
+    <li></li>
+  </ul>
+
+  <div id="information_widget">
+    <div id="score">Score: <span class="value"></span></div>
+    <div id="time_taken">Time: <span class="value"></span></div>
+    <div id="last_score">Time at last score: <span class="value"></span></div>
+    <div><button id="done">Done</button></div>
+    <div id="more_info"></div>
+  </div>
+
+</form>

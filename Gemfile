@@ -13,6 +13,7 @@ end
 
 gem 'jquery-rails'
 gem 'thin'
+# gem 'spreadhead'
 
 group :production do
   gem 'pg'
